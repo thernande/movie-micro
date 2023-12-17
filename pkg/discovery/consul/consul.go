@@ -3,6 +3,7 @@ package consul
 import (
 	"context"
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -64,7 +65,7 @@ func (r *Registry) ServiceAddresses(ctx context.Context, serviceName string) ([]
 		return nil, discovery.ErrNotFound
 	}
 	for _, service := range services {
-		addresses = append(addresses, service.Checks[0].Output)
+		addresses = append(addresses, fmt.Sprintf("%s:%d", service.Service.Address, service.Service.Port))
 	}
 	return addresses, nil
 }

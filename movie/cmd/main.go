@@ -34,14 +34,14 @@ func main() {
 	}
 	go func() {
 		for {
-			if err := registry.
-				ReportHealthyState(instanceID, serviceName); err != nil {
+			if err := registry.ReportHealthyState(instanceID, serviceName); err != nil {
 				log.Println("Failed to report healthy state: " + err.Error())
 			}
 			time.Sleep(1 * time.Second)
 		}
 	}()
 	defer registry.Deregister(ctx, instanceID, serviceName)
+	fmt.Printf("registry: %#v", registry)
 	metadataGateway := metadatagateway.New(registry)
 	ratingGateway := ratinggateway.New(registry)
 	svc := movie.New(ratingGateway, metadataGateway)

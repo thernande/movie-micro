@@ -19,7 +19,7 @@ const serviceName = "metadata"
 
 func main() {
 	var port int
-	flag.IntVar(&port, "port", 8081, "API handler port")
+	flag.IntVar(&port, "port", 8082, "API handler port")
 	flag.Parse()
 	log.Printf("Starting the metadata service on port %d", port)
 	registry, err := consul.NewRegistry("localhost:8500")

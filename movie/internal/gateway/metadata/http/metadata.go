@@ -27,6 +27,7 @@ func New(registry discovery.Registry) *Gateway {
 // Get gets movie metadata by a movie id.
 func (g *Gateway) Get(ctx context.Context, id string) (*model.Metadata, error) {
 	addrs, err := g.registry.ServiceAddresses(ctx, "metadata")
+	fmt.Printf("addrs: %#v\n", addrs)
 	if err != nil {
 		return nil, err
 	}
